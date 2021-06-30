@@ -1,15 +1,24 @@
 import express, { Request, Response } from 'express'
-import bodyParser from 'body-parser'
+import usersRoute from './routes/users'
+import productsRoute from './routes/products'
+import ordersRoute from './routes/orders'
 
-const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+const app = express()
+const port = 3000
 
-app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World!')
+app.get('/', (req: Request, res: Response) => {
+    res.send('Main')
 })
 
-app.listen(3000, function () {
-    console.log(`starting app on: ${address}`)
+app.use('/users', usersRoute)
+app.use('/orders', ordersRoute)
+app.use('/products', productsRoute)
+
+app.listen(port, () => {
+    console.log('Server started on port ' + port)
 })
+
+export default app
