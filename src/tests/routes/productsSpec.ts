@@ -69,7 +69,7 @@ describe('Products Route', () => {
             }).then()
         expect(res.body.name).toEqual('prod6')
     })
-    it('GET /products/:category', async () => {
+    it('GET /products/category/:category', async () => {
         const res: Response = await request(app)
             .get('/products/category/cate1')
             .catch(err => {
