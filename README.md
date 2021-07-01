@@ -23,3 +23,14 @@ Linux or other OSs: [NodeSource Installer](https://github.com/nodesource/distrib
 ### Commands
 - Start: `yarn start`
 - Test: `yarn test`
+
+### .env
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=storefront_dev
+POSTGRES_TEST_DB=storefront_test
+POSTGRES_USER=storefront_user
+POSTGRES_PASSWORD=password123
+ENV=dev
+BCRYPT_PASSWORD=speak-friend-and-enter
+SALT_ROUNDS=10
+TOKEN_SECRET=alohomora123!
