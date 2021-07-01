@@ -5,38 +5,52 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show (args: product id)
-- Create (args: Product)[token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index: `/products` (Get)
+> Return: `[{id: Product ID, name: Product name, price: Price, category: Category}, ...]` (JSON)
+- Show: `/products/[Product_ID]` (Get)
+> Return: `{id: Product ID, name: Product name, price: Price, category: Category}` (JSON)
+- Create (token required): `/products` (Post)<br/>
+Body: `name` = Product name, `price` = Price, `category` = Category
+> Return: `{id: Product ID, name: Product name, price: Price, category: Category}` (JSON)
+- Top 5 most popular products: `/products/topfive` (Get)
+> Return: `[{product_id: Product ID, quantity: Total sold quantity}, ...]` (JSON)
+- Products by category: `/products/category/[Category]` (Get)
+> Return: `[{id: Product ID, name: Product name, price: Price, category: Category}, ...]` (JSON)
 
 #### Users
-- Index [token required]
-- Show (args: id)[token required]
-- Create (args: User)[token required]
+- Index (token required): `/products` (Get)
+> Return: `[{id: Username, password: Password, firstName: First Name, lastName: Last Name}, ...]` (JSON)
+- Show (token required): `/products/[Username]` (Get)
+> Return: `{id: Username, password: Password, firstName: First Name, lastName: Last Name}` (JSON)
+- Create (token required): `/products` (Post)<br/>
+Body: `id` = Username, `password` = Password, `firstName` = First Name, `lastName` = Last Name
+> Return: Token with encrypted json data<br/> `{id: Username, password: Hashed Password, firstName: First Name, lastName: Last Name}`
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user (token required): `/orders/current/[Username]` (Get)
+> Return: `{id: Order ID, user_id: Username, status: Status}` (JSON)
+- Completed Orders by user (token required): `orders/completed/[Username]` (Get)
+> Return: `[{id: Order ID, user_id: Username, status: Status}, ...]` (JSON)
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+-  id : Integer
+- name : Varchar
+- price : Integer
+- category : Varchar
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id : Varchar
+- firstName : Varchar
+- lastName : Varchar
+- password : Varchar
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id : Varchar
+- user_id : Varchar
+- status : TRUE = completed, FALSE = active
 
+#### Order_Products
+- order_id : Integer
+- product_id : Integer
+- quantity : Integer
